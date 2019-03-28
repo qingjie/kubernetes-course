@@ -69,3 +69,26 @@ kubectl get pods
 kubectl delete rc/replication-controller
 
 ```
+
+```
+# Get information on current deployments
+kubectl get deployments
+# Get information about the replica sets
+kubectl get rs
+# get pods, and also show labels attached to those pods
+kubectl get pods --show-labels
+# Get deployment status
+kubectl rollout status deployment/helloworld-deployment
+# Run k8s-demo with the image label version 2
+kubectl set image deployment/helloworld-deployment k8s-demo=k8s-demo:2
+# Edit the deployment object
+kubectl edit deployment/helloworld-deployment 
+# Get status of the rollout
+kubectl rollout status deployment/helloworld-deployment 
+# Get the rollout history
+kubectl rollout history deployment/helloworld-deployment 
+# Rollback to previous version
+kubectl rollout undo deployment/helloworld-deployment 
+# Rollback to any version
+kubectl rollout undo deployment/helloworld-deployment --to-revision=n
+```
