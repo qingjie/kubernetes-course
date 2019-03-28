@@ -52,3 +52,20 @@ or
 kubectl expose pod <pod> --type=NodePortn --name <pod>-service
 kubectl get service
 ```
+
+```
+cat kubernetes-course/replication-controller/helloworld-repl-controller.yaml
+kubectl create -f  kubernetes-course/replication-controller/helloworld-repl-controller.yaml
+kubectl get pods
+kubectk describe pod <pod>
+kubectl delete pod <pod>
+# it will have 4 pods
+kubectl scale --replicas=4 -f kubernetes-course/replication-controller/helloworld-repl-controller.yaml
+kubectl get rc
+# set replica = 1
+kubectl scale --replicas=1 rc/replication-controller
+kubectl get pods
+# delete replica
+kubectl delete rc/replication-controller
+
+```
