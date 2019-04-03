@@ -92,3 +92,31 @@ kubectl rollout undo deployment/helloworld-deployment
 # Rollback to any version
 kubectl rollout undo deployment/helloworld-deployment --to-revision=n
 ```
+
+```
+# change wardviaene to qingjiezhao
+cat deployment/helloworld.yml
+kubectl create -f deployment/helloworld.yml
+kubectl get deployments
+kubectl get rs
+kubectl get pods
+kubectl get pods --show-labels
+kubectl rollout status deployments/helloworld-deployment
+kubectl expose deployment helloworld-deployment --type=NodePort
+kubectl get service
+kubectl describe service helloworld-deployment
+kubectl set image deployment/helloworld-deployment k8-demo=qingjiezhao/k8s-demo:2
+kubectl rollout status deployment/helloworld-deployment
+kubectl rollout history deployment/helloworld-deployment
+kubectl rollout undo deployment/helloworld-deployment
+kubectl rollout status deployment/helloworld-deployment
+# set revisionHistoryLimit: 10
+kubectl edit deployment/helloworld-deployment
+
+kubectl set image deployment/helloworld-deployment k8s-demo=qingjiezhao/k8s-demo:2
+kubectl rollout history deployment/helloworld-deployment
+kubectl set image deployment/helloworld-deployment k8s-demo=qingjiezhao/k8s-demo:1
+kubectl rollout history deployment/helloworld-deployment
+kubectl rollout undo deployment/helloworld-deployment --to-revision=2
+kubectl rollout history deployment/helloworld-deployment
+```
