@@ -154,3 +154,21 @@ kubectl create -f lifecycle.yaml
 kubectl exec -it lifecycle-57596644f4-k7vll -- cat /timing
 kubectl exec -it lifecycle-57596644f4-k7vll -- tail /timing -f
 ```
+
+```
+cat deployment/helloworld-secrets.yml
+kubectl create -f deployment/helloworld-secrets.yml
+
+cat deployment/helloworld-secrets-volumes.yml
+kubectl create -f deployment/helloworld-secrets-volumes.yml
+
+kubectl get pods
+kubectl describe pod/helloworld-deployment-596cb56f6d-55fbt
+
+#get in the shell of docker
+kubectl exec helloworld-deployment-596cb56f6d-55fbt -i -t -- /bin/bash
+cat /etc/creds/username
+cat /etc/creds/password
+mount
+ls /run/secrets/kubernetes.io/serviceaccount/
+```
