@@ -120,3 +120,23 @@ kubectl rollout history deployment/helloworld-deployment
 kubectl rollout undo deployment/helloworld-deployment --to-revision=2
 kubectl rollout history deployment/helloworld-deployment
 ```
+
+```
+cat deployment/helloworld-nodeselector.yml
+ubectl get nodes --show-labels
+kubectl get pods
+kubectl describe pod helloworld-deployment-6655b48c56-54ppl
+
+kubectl get nodes
+kubectl label nodes ip-172-20-33-13.ec2.internal hardware=high-spec
+kubectl get nodes --show-labels
+
+
+
+
+cat deployment/helloworld-healthcheck.yml
+kubectl create -f deployment/helloworld-healthcheck.yml
+kubectl get pods
+kubectl describe pod helloworld-deployment-689656bb4d-cmdjj
+kubectl edit deployment/helloworld-deployment
+```
