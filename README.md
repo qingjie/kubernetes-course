@@ -140,3 +140,17 @@ kubectl get pods
 kubectl describe pod helloworld-deployment-689656bb4d-cmdjj
 kubectl edit deployment/helloworld-deployment
 ```
+
+```
+
+kubectl create -f helloworld-healthcheck.yml
+kubectl get pods
+kubectl create -f helloworld-liveness-readiness.yml
+kubectl get pods
+
+
+brew install watch
+kubectl create -f lifecycle.yaml
+kubectl exec -it lifecycle-57596644f4-k7vll -- cat /timing
+kubectl exec -it lifecycle-57596644f4-k7vll -- tail /timing -f
+```
