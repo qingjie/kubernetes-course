@@ -172,3 +172,19 @@ cat /etc/creds/password
 mount
 ls /run/secrets/kubernetes.io/serviceaccount/
 ```
+
+```
+kubectl create -f wordpress/wordpress-secrets.yml
+kubectl create -f wordpress/wordpress-single-deployment-no-volumes.yml
+kubectl get pods
+kubectl describe pod wordpress-deployment-9cb886cf6-dr9kl
+
+cat README.md
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
+
+
+kubectl create -f sample-user.yaml
+kubectl -n kube-system get secret | grep admin-user
+kubectl -n kube-system describe secret admin-user-token-<id displayed by previous command>
+https://api.test.operr.net/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/storageclass?namespace=default
+```
