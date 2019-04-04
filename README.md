@@ -188,3 +188,15 @@ kubectl -n kube-system get secret | grep admin-user
 kubectl -n kube-system describe secret admin-user-token-<id displayed by previous command>
 https://api.test.operr.net/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/storageclass?namespace=default
 ```
+
+```
+cat configmap/reverseproxy.conf
+kubectl create configmap nginx-config --from-file=configmap/reverseproxy.conf
+kubectl get configmap
+kubectl get configmap nginx-config -o yaml
+cat configmap/nginx.yml
+kubectl create -f configmap/nginx.yml
+kubectl create -f configmap/nginx-service.yml
+kubectl exec -i -t helloworld-nginx -c nginx -- bash
+cat /etc/nginx/conf.d/reverseproxy.conf
+```
