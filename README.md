@@ -200,3 +200,35 @@ kubectl create -f configmap/nginx-service.yml
 kubectl exec -i -t helloworld-nginx -c nginx -- bash
 cat /etc/nginx/conf.d/reverseproxy.conf
 ```
+
+```
+aws ec2 create-volume --size 10 --region us-east-1 --availability-zone us-east-1a --volume-type gp2 --tag-specifications 'ResourceType=volume, Tags=[{Key=KubernetesCluster,Value=test.qingjiezhao.net}]'
+
+# add vol-02379fe282d21a7e3
+vi volumes/helloworld-with-volume.yml
+
+kubectl create -f volumes/helloworld-with-volume.yml
+kubectl get pod
+kubectl describe pod helloworld-deployment-687844d5c4-mzkjz
+kubectl exec helloworld-deployment-687844d5c4-mzkjz -i -t -- bash
+ls -ahl /myvol/
+echo 'test' > /myvol/myvol.txt
+echo 'test2' > /test.txt
+ls -ahl /myvol/myvol.txt
+ls -ahl /test.txt
+exit
+
+#get node info when kubectl describe pod helloworld-deployment-687844d5c4-mzkjz
+kubectl drain ip-172-20-33-13.ec2.internal --force
+kubectl get pod
+kubectl describe pod helloworld-deployment-687844d5c4-czt78
+kubectl exec helloworld-deployment-687844d5c4-czt78 -i -t -- bash
+ls -ahl /myvol/
+ls -ahl /myvol/myvol.txt
+ls -ahl /test.txt
+
+# remove volume 
+vi volumes/helloworld-with-volume.yml
+aws ec2 delete-volume --volume-id vol-02379fe282d21a7e3
+kubectl delete -f volumes/helloworld-with-volume.yml
+```
