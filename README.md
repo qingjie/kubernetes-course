@@ -234,6 +234,7 @@ kubectl delete -f volumes/helloworld-with-volume.yml
 ```
 
 ```
+#pod-presets
 kops version
 cd pod-presets
 # create a cluster
