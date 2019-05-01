@@ -253,3 +253,16 @@ kubectl create -f deployments.yaml
 kubectl get pods
 kubectl descibe pod .... | less
 ```
+
+```
+#auto scaling
+ls autoscaling/
+cat autoscaling/hpa-example.yml
+kubectl create -f autoscaling/hpa-example.yml
+kubectl get hpa
+kubectl run -i --tty load-generator --image=busybox /bin/sh
+wget http://hpa-example.default.svc.cluster.local:31001
+while true; do wget -q -0- wget http://hpa-example.default.svc.cluster.local:31001; done
+kubectl get hpa
+kubectl get pod
+```
