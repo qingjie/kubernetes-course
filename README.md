@@ -304,3 +304,27 @@ spec:
   services: "10"
   services.loadbalancers: "2"
 ```
+
+```
+cat resourcequotas/resourcequota.yml
+kubectl create -f resourcequotas/resourcequota.yml
+cat resourcequotas/helloworld-no-quotas.yml
+kubectl create -f resourcequotas/helloworld-no-quotas.yml
+kubectl get deploy --namespace=myspace
+kubectl get rs --namespace=myspace
+kubectl describe rs/...  --namespace=myspace
+kubectl delete deploy/helloworld-deployment --namespace=myspace
+cat resourcequotas/helloworld-with-quotas.yml
+kubectl create -f resourcequotas/helloworld-with-quotas.yml
+kubectl get pod --namespace=myspace
+kubectl get rs --namespace=myspace
+kubectl describe rs/...  --namespace=myspace
+kubectl get quota --namespace=myspace
+kubectl describe quota/compute-quota --namespace=myspace
+kubectl delete deploy/helloworld-deployment  --namespace=myspace
+cat resourcequotas/defaults.yml
+kubectl create -f resourcesquotas/default.yml
+kubectl describe limits limits --namespace=myspace
+kubectl create -f resourcequotas/helloworld-no-quotas.yml
+kubectl get pods --namespace=myspace
+```
