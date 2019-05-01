@@ -232,3 +232,23 @@ vi volumes/helloworld-with-volume.yml
 aws ec2 delete-volume --volume-id vol-02379fe282d21a7e3
 kubectl delete -f volumes/helloworld-with-volume.yml
 ```
+
+```
+kops version
+cd pod-presets
+# create a cluster
+kops create cluster --name=test.qingjiezhao.com --state=s3://... --zones=eu-east-1a --node-count=2 --node-size=t2.micro --master-size=t2.micro --dns-zone=test.qingjiezhao.com
+cat README.txt
+
+kops edit cluster test.qingjiezhao.com
+and add sepc part into
+kops update cluster test.qingjiezhao.com --yes --state=s3://...
+kubectl get nodes
+cat pod-presets.yaml
+cat deployments.yaml
+kubectl create -f pod-presets.yaml
+kubectl get podpresets
+kubectl create -f deployments.yaml
+kubectl get pods
+kubectl descibe pod .... | less
+```
