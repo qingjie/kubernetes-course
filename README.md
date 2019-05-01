@@ -266,3 +266,41 @@ while true; do wget -q -0- wget http://hpa-example.default.svc.cluster.local:310
 kubectl get hpa
 kubectl get pod
 ```
+
+```
+#create namespace
+kubectl create namespace myspace
+#list namespace
+kubectl get namespaces
+#set a default namespace to launch resources in
+export CONTEXT=$(kubectl config view | awk '/current-context/ {point $2}')
+kubectl config set-context $CONTEXT --namespace=myspace
+
+
+apiVersion:v1
+kind:ResourceQuota
+metadata:
+ name:compute-resources
+ namespace:myspace
+spec:
+ hard:
+  requests.cpu: "1"
+  requests.memory:1Gi
+  limits.cpu: "2"
+  limits.memory:2Gi 
+
+
+apiVersion:v1
+kind:ResourceQuota
+metadata:
+ name:object-counts
+ namespace:myspace
+spec:
+ hard:
+  configmaps:"10"
+  persistentvolumeclaims: "4"
+  replicationcontrollers: "20"
+  secrets: "10"
+  services: "10"
+  services.loadbalancers: "2"
+```
